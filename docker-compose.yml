@@ -1,0 +1,26 @@
+version: '3' 
+
+services: 
+  db: 
+    image: postgres
+    restart: always
+    # this volumes is used to persist the data in the database 
+    volumes: 
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      # PGDATA: /var/lib/postgresql/data/pgdata
+      # POSTGRES_INITDB_ARGS: "--data-checksums"
+
+
+
+  # adminers is a web interface for postgres database administration
+  adminers:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
